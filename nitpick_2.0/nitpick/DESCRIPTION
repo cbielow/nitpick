@@ -1,5 +1,5 @@
 Package: nitpick
-Depends: amsmercury, iwrlars
+Depends: amsmercury, iwrlars, quadprog
 Type: Package
 Title: NITPICK implementation for peak picking in MS spectra
 Version: 2.0

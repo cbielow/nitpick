@@ -92,7 +92,7 @@ function(x, y, type = c("lasso","plasso", "lar", "forward.stagewise"), trace = F
     inactive<-im[-ignores]
     normx[nosignal]<-eps*sqrt(n)
     if(trace)
-      cat("LARS Step 0 :\t", sum(nosignal), "Variables with Variance < \eps; dropped for good\n")	#
+      cat("LARS Step 0 :\t", sum(nosignal), "Variables with Variance < eps; dropped for good\n")	#
   }
   else ignores <- NULL #singularities; augmented later as well
   names(normx) <- NULL
