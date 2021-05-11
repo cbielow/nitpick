@@ -7,7 +7,7 @@ library(nitpick)
 ##real data
 
 ##load spectrum 2xN matrix of 
-spectrum<-read.table("TOF-MS-yylBSAstd-sample4-23.817-29.278-rebinned.txt")
+spectrum<-read.table("12859_2008_2340_MOESM3_ESM.txt")
 
 #adjust spectrum for relevant region detection to not have zero entries (and thus increase robustness)
 minSpec<-min(spectrum[spectrum[,2]>0,2])
