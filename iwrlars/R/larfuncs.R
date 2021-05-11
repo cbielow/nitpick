@@ -587,6 +587,4 @@ function(r, z, k = p)
 		as.integer(dz[2]),
                 PACKAGE="iwrlars")[c(1, 4)]
 }
-".First.lib" <-
-function (lib, pkg) 
-  library.dynam("iwrlars", pkg, lib)
+
