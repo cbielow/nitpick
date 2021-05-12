@@ -380,16 +380,17 @@ save(errsRss.tp,file=paste(path,"pp_errs_",thresh,"_",g,"_",quant,"_",SNR,"_",wi
 
 
 # now run simulation
+out_path = "./results/";
+dir.create(out_path)
+runSim(100,500,0,.0001,out_path,c(1),1e-26,EFA=FALSE,hierarchical=FALSE,gdf=TRUE,bic.steps=0,maxRangeSize=10)
+runSim(50,500,0,.0001,out_path,c(1),1e-26,EFA=FALSE,hierarchical=FALSE,gdf=TRUE,bic.steps=0,maxRangeSize=10)
+runSim(25,500,0,.0001,out_path,c(1),1e-26,EFA=FALSE,hierarchical=FALSE,gdf=TRUE,bic.steps=0,maxRangeSize=10)
+runSim(10,500,0,.0001,out_path,c(1),1e-26,EFA=FALSE,hierarchical=FALSE,gdf=TRUE,bic.steps=0,maxRangeSize=10)
+runSim(5,500,0,.0001,out_path,c(1),1e-26,EFA=FALSE,hierarchical=FALSE,gdf=TRUE,bic.steps=0,maxRangeSize=10)
 
-runSim(100,500,0,.0001,"/results/",c(1),1e-26,EFA=FALSE,hierarchical=FALSE,gdf=TRUE,bic.steps=0,maxRangeSize=10)
-runSim(50,500,0,.0001,"/results/",c(1),1e-26,EFA=FALSE,hierarchical=FALSE,gdf=TRUE,bic.steps=0,maxRangeSize=10)
-runSim(25,500,0,.0001,"/results/",c(1),1e-26,EFA=FALSE,hierarchical=FALSE,gdf=TRUE,bic.steps=0,maxRangeSize=10)
-runSim(10,500,0,.0001,"/results/",c(1),1e-26,EFA=FALSE,hierarchical=FALSE,gdf=TRUE,bic.steps=0,maxRangeSize=10)
-runSim(5,500,0,.0001,"/results/",c(1),1e-26,EFA=FALSE,hierarchical=FALSE,gdf=TRUE,bic.steps=0,maxRangeSize=10)
 
-
-runPostProc(500,100,0,.0001,0,3,"/results/",0,mz.bin=mz.bins, chargestates=c(1),recalc=TRUE)
-runPostProc(500,50,0,.0001,0,3,"/results/",0,mz.bin=mz.bins, chargestates=c(1),recalc=FALSE)
-runPostProc(500,25,0,.0001,0,3,"/results/",0,mz.bin=mz.bins, chargestates=c(1),recalc=FALSE)
-runPostProc(500,10,0,.0001,0,3,"/results/",0,mz.bin=mz.bins, chargestates=c(1),recalc=FALSE)
-runPostProc(500,5,0,.0001,0,3,"/results/",0,mz.bin=mz.bins, chargestates=c(1),recalc=FALSE)
+## runPostProc(500,100,0,.0001,0,3,out_path,0,mz.bin=mz.bins, chargestates=c(1),recalc=TRUE) -- this does not work, since nitpick::compareSwissprot() uses different variables compared to the ones offered by 'uniprot_sprot-HUMAN-tryptic-equispaced11-500-700-charge-1-N-500-k-20....'
+runPostProc(500,50,0,.0001,0,3,out_path,0,mz.bin=mz.bins, chargestates=c(1),recalc=FALSE)
+runPostProc(500,25,0,.0001,0,3,out_path,0,mz.bin=mz.bins, chargestates=c(1),recalc=FALSE)
+runPostProc(500,10,0,.0001,0,3,out_path,0,mz.bin=mz.bins, chargestates=c(1),recalc=FALSE)
+runPostProc(500,5,0,.0001,0,3,out_path,0,mz.bin=mz.bins, chargestates=c(1),recalc=FALSE)
