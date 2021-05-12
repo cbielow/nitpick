@@ -67,7 +67,7 @@ resultList<-rbind(resultList,fight)
 }
 #save result and run postprocessing
 save(resultList,file="0resultList_width_0.00008.rda")
-runPostProc(0.00008,0,30,"0resultList_width_0.00008.rda",pathOut="",mz.bin=spectrum[,1], chargestates=c(1,2,3,4,5,6))
+nitpick::runPostProc(0.00008,0,30,"0resultList_width_0.00008.rda",pathOut="",mz.bin=spectrum[,1], chargestates=c(1,2,3,4,5,6))
 load("pp_resultList__30_0.08.RDA")
 pp_resultList_BS<-cbind(spectrum[pp_resultList[,1],1],pp_resultList[,2:3])
 save(pp_resultList_BS,file="0pp_resultList_g_30width0.08.RDA")
@@ -77,9 +77,7 @@ save(pp_resultList_BS,file="0pp_resultList_g_30width0.08.RDA")
 
 ##simulation
 
-stop("the data below is not available on the internet... so we cannot run the simulation...")
-
-load("mz.bins.500-700.equispaced11.rda")
+load("simulation_data/mz.bins.500-700.equispaced11.rda")
 
 
 runSim<-function(SNR,Nu,thresh,width,path,charge, limit,EFA=TRUE,hierarchical=FALSE,gdf=TRUE,bic.steps=0,maxRangeSize=10){
@@ -96,13 +94,13 @@ runSim<-function(SNR,Nu,thresh,width,path,charge, limit,EFA=TRUE,hierarchical=FA
 
 
        #load data
-	load("relevantRegions-uniprot_sprot-HUMAN-tryptic-equispaced11-500-700-charge-1-N-500-k-20.rda")
+	load("simulation_data/relevantRegions-uniprot_sprot-HUMAN-tryptic-equispaced11-500-700-charge-1-N-500-k-20.rda")
 
-	load("uniprot_sprot-HUMAN-tryptic-equispaced11-500-700-charge-1-N-500-k-20.rda")
+	load("simulation_data/uniprot_sprot-HUMAN-tryptic-equispaced11-500-700-charge-1-N-500-k-20.rda")
 
-	load(paste("uniprot_sprot-HUMAN-tryptic-equispaced11-500-700-charge-1-N-500-k-20-spectra-SNR-",SNR,".rda",sep=""))
+	load(paste("simulation_data/uniprot_sprot-HUMAN-tryptic-equispaced11-500-700-charge-1-N-500-k-20-spectra-SNR-",SNR,".rda",sep=""))
 	
-	load("mz.bins.500-700.equispaced11.rda") 
+	load("simulation_data/mz.bins.500-700.equispaced11.rda") 
 
 	#define bins
 	for(i in 1:Nu)
@@ -266,13 +264,13 @@ else
 
 if(chargestates[1]==2)
 {
-load("uniprot_sprot-HUMAN-tryptic-equispaced11-500-700-charges-2-5-N-500-k-20.rda")
-load(paste("uniprot_sprot-HUMAN-tryptic-equispaced11-500-700-charges-2-5-N-500-k-20-spectra-SNR-",SNR,".rda",sep=""))
+load("simulation_data/uniprot_sprot-HUMAN-tryptic-equispaced11-500-700-charges-2-5-N-500-k-20.rda")
+load(paste("simulation_data/uniprot_sprot-HUMAN-tryptic-equispaced11-500-700-charges-2-5-N-500-k-20-spectra-SNR-",SNR,".rda",sep=""))
 }
 else
 {
-load("uniprot_sprot-HUMAN-tryptic-equispaced11-500-700-charge-1-N-500-k-20.rda")
-load(paste("uniprot_sprot-HUMAN-tryptic-equispaced11-500-700-charge-1-N-500-k-20-spectra-SNR-",SNR,".rda",sep=""))
+load("simulation_data/uniprot_sprot-HUMAN-tryptic-equispaced11-500-700-charge-1-N-500-k-20.rda")
+load(paste("simulation_data/uniprot_sprot-HUMAN-tryptic-equispaced11-500-700-charge-1-N-500-k-20-spectra-SNR-",SNR,".rda",sep=""))
 }
 
 for(i in 1:Nu)
