@@ -251,15 +251,18 @@ pp_lengthResultList<-vector(length=Nu)
 charges<-chargestates
 
 ##recalc the breakpoints
-if(recalc)
-{breakCountMatrix<-matrix(ncol=max(chargestates),nrow=length(mz.bin)+1)
-	 for (i in charges)
-		{breakCountMatrix[,i]<-compareSwissprot(i,mz.bin)
-		}
-	save(breakCountMatrix,file=paste(path,"/breakCountMatrix.RDA",sep=""))
-}
-else
-{	load(paste(path,"/breakCountMatrix.RDA",sep=""))
+if (FALSE) ## added post publication: corresponding to database = FALSE in nitpick::runPostProc
+{ ## we do not have 'breakCountMatrix' since the code in 'compareSwissprot' is broken. Also, its optional in nitpick::runPostProc (which is very similar to this func...). So we just skip it for now.
+  if(recalc)
+  {breakCountMatrix<-matrix(ncol=max(chargestates),nrow=length(mz.bin)+1)
+     for (i in charges)
+      {breakCountMatrix[,i]<-compareSwissprot(i,mz.bin)
+      }
+    save(breakCountMatrix,file=paste(path,"/breakCountMatrix.RDA",sep=""))
+  }
+  else
+  {	load(paste(path,"/breakCountMatrix.RDA",sep=""))
+  }
 }
 
 if(chargestates[1]==2)
@@ -277,12 +280,15 @@ for(i in 1:Nu)
 {
       resultListSample<-resultList[max((sum(lengthResultList[min(i-1,1):(i-1)])+1),1):sum(lengthResultList[1:i]),]
       resultListSample<-resultListSample[resultListSample[,1]>0,]
-      for (k in chargestates)
-	{ resultListSampleCharge<-resultListSample[resultListSample[,2]==k,,drop=F]
-	  otherResults<-resultListSample[resultListSample[,2]!=k,]
-         resultListSample<- rbind(resultListSampleCharge[breakCountMatrix[resultListSampleCharge[,1],k]>threshCounts, ],otherResults)
-       }
-
+      if (FALSE)
+      { ## added post publication: we do not have 'breakCountMatrix' since the code in 'compareSwissprot' is broken. Also, its optional in nitpick::runPostProc (which is very similar to this func...). So we just skip it for now.
+        for (k in chargestates)
+        { resultListSampleCharge<-resultListSample[resultListSample[,2]==k,,drop=F]
+          otherResults<-resultListSample[resultListSample[,2]!=k,]
+          resultListSample<- rbind(resultListSampleCharge[breakCountMatrix[resultListSampleCharge[,1],k]>threshCounts, ],otherResults)
+        }
+      }
+       
        result<-resultListSample
        result<-ams.pp.pl.slidingMaxAdjusted(result,FALSE,g)
        result<-result[result[,1]>0,]
